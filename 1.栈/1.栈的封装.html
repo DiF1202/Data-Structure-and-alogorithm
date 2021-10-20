@@ -1,0 +1,83 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-10-20 19:48:10
+ * @LastEditTime: 2021-10-20 20:25:04
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \js数据结构与算法\栈\1.栈的封装.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>栈的封装</title>
+</head>
+
+<body>
+    <script>
+        //Methods:和某一个对象实例有联系
+        //function
+        //封装栈类
+        function Stack() {
+            //栈中的属性
+            this.items = []
+            //栈相关的操作
+
+            //1.将元素压入栈
+            Stack.prototype.push = function (element) {
+                this.items.push(element)
+            }
+
+            //2.从栈中取出元素
+            Stack.prototype.pop = function () {
+                return this.items.pop()
+            }
+            //3.查看一下栈顶元素
+            Stack.prototype.peek = function () {
+                return this.items[this.items.length - 1]
+            }
+
+            //4.判断栈是否为空
+            Stack.prototype.isEmpty = function () {
+                return this.items.length === 0
+            }
+
+            //5.获取栈中元素的个数
+            Stack.prototype.size = function () {
+                return this.items.length
+            }
+
+            //6.toString方法
+            Stack.prototype.toString = function () {
+                var result = ''
+                for (let i = 0; i < this.items.length; i++) {
+                    result += this.items[i] + ' '
+                }
+                return result
+            }
+
+        }
+
+        //栈的使用
+        var s = new Stack()
+
+        s.push(20)
+        s.push(10)
+        s.push(12)
+        s.push(8)
+        s.push(7)
+        console.log(s.items)
+        s.pop()
+        console.log(s.items)
+        console.log(s.peek())
+        console.log(s.isEmpty())
+        console.log(s.size())
+        console.log(s.toString())
+
+    </script>
+</body>
+
+</html>

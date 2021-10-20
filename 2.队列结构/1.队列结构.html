@@ -1,0 +1,81 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-10-21 00:07:58
+ * @LastEditTime: 2021-10-21 00:25:59
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \js数据结构与算法\2.队列结构\1.队列结构.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>队列的封装</title>
+</head>
+
+<body>
+    <script>
+        //队列与栈不同 队列是先进先出
+        //栈式后进先出
+        //栈就是吃了吐
+        //队列吃了拉
+
+        function Queue() {
+            //属性
+            this.items = []
+
+            //方法
+            //1.给队列添加元素
+            Queue.prototype.enqueue = function (Element) {
+                this.items.push(Element)
+            }
+            //2.从队列中删除前端元素
+            Queue.prototype.dequeue = function () {
+                return this.items.shift()
+            }
+
+            //3.查看前端元素
+            Queue.prototype.peek = function () {
+                return this.items?.[0]
+            }
+            //4.查看队列是否为空
+            Queue.prototype.isEmpty = function () {
+                return this.items.length === 0
+            }
+            //5.查看队列中元素的个数
+            Queue.prototype.size = function () {
+                return this.items.length
+            }
+            //6.toString方法
+            Queue.prototype.toString = function () {
+                var result = ''
+                for (let i = 0; i < this.items.length; i++) {
+                    result += this.items[i] + ' '
+                }
+                return result
+            }
+        }
+
+        //使用队列
+        var queue = new Queue()
+        queue.enqueue('123')
+        queue.enqueue('234')
+        queue.enqueue('256')
+        queue.enqueue('777')
+        console.log(queue.items)
+
+        queue.dequeue()
+        console.log(queue.items)
+
+        console.log(queue.peek())
+
+        console.log(queue.isEmpty())
+        console.log(queue.size())
+        console.log(queue.toString())
+    </script>
+</body>
+
+</html>
