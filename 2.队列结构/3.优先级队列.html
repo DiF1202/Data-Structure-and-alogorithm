@@ -1,0 +1,90 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-10-21 09:26:22
+ * @LastEditTime: 2021-10-21 10:03:34
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \js数据结构与算法\2.队列结构\3.优先级队列.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>优先级队列</title>
+</head>
+
+<body>
+    <script>
+        //封装优先级队列
+        function PriorityQueue() {
+            //创建一个内部类
+            function QueueElement(element, priority) {
+                this.element = element
+                this.priority = priority
+            }
+
+            //封装属性
+            this.items = []
+
+            //1.实现插入方法
+            PriorityQueue.prototype.enqueue = function (element, priority) {
+                //1.创建内部类对象
+                var queueElement = new QueueElement(element, priority)
+
+                //2.判断队列是否为空
+                if (this.items.length == 0) {
+                    this.items.push(queueElement)
+                } else {
+                    var added = false
+                    for (let i = 0; i < this.items.length; i++) {
+                        if (queueElement.priority < this.items[i].priority) {
+                            this.items.splice(i, 0, queueElement)
+                            added = true
+                            break
+                        }
+                    }
+                    if (!added) {
+                        this.items.push(queueElement)
+                    }
+                }
+            }
+
+            //2.从队列中删除前端元素
+            PriorityQueue.prototype.dequeue = function () {
+                return this.items.shift()
+            }
+
+            //3.查看前端元素
+            PriorityQueue.prototype.peek = function () {
+                return this.items?.[0]
+            }
+            //4.查看队列是否为空
+            PriorityQueue.prototype.isEmpty = function () {
+                return this.items.length === 0
+            }
+            //5.查看队列中元素的个数
+            PriorityQueue.prototype.size = function () {
+                return this.items.length
+            }
+            //6.toString方法
+            PriorityQueue.prototype.toString = function () {
+                var result = ''
+                for (let i = 0; i < this.items.length; i++) {
+                    result += this.items[i].element + '-' + this.items[i].priority + ' '
+                }
+                return result
+            }
+        }
+
+        var queue = new PriorityQueue()
+        queue.enqueue('zwl', 100)
+        queue.enqueue('lzb', 1000)
+        queue.enqueue('hdf', 10)
+        alert(queue)
+    </script>
+</body>
+
+</html>

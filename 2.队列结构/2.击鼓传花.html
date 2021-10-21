@@ -1,0 +1,92 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-10-21 00:07:58
+ * @LastEditTime: 2021-10-21 01:08:04
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \js数据结构与算法\2.队列结构\1.队列结构.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>队列的封装</title>
+</head>
+
+<body>
+    <script>
+        //队列与栈不同 队列是先进先出
+        //栈式后进先出
+        //栈就是吃了吐
+        //队列吃了拉
+
+        function Queue() {
+            //属性
+            this.items = []
+
+            //方法
+            //1.给队列添加元素
+            Queue.prototype.enqueue = function (Element) {
+                this.items.push(Element)
+            }
+            //2.从队列中删除前端元素
+            Queue.prototype.dequeue = function () {
+                return this.items.shift()
+            }
+
+            //3.查看前端元素
+            Queue.prototype.peek = function () {
+                return this.items?.[0]
+            }
+            //4.查看队列是否为空
+            Queue.prototype.isEmpty = function () {
+                return this.items.length === 0
+            }
+            //5.查看队列中元素的个数
+            Queue.prototype.size = function () {
+                return this.items.length
+            }
+            //6.toString方法
+            Queue.prototype.toString = function () {
+                var result = ''
+                for (let i = 0; i < this.items.length; i++) {
+                    result += this.items[i] + ' '
+                }
+                return result
+            }
+        }
+
+        //使用队列
+        var queue = new Queue()
+
+        //封装击鼓传花函数
+        function passGame(nameList, num) {
+            //1.创建一个队列结构
+            var queue = new Queue()
+            //2.将所有人一次加入队列
+            for (let i = 0; i < nameList.length; i++) {
+                queue.enqueue(nameList[i])
+            }
+            //3.开始数数字
+            while (queue.size() > 1) {
+                //3.1num数字之前的人重新加入队列尾部
+                for (let i = 0; i < num - 1; i++) {
+                    queue.enqueue(queue.dequeue())
+                }
+                //3.2num对应的这个人删除
+                queue.dequeue()
+            }
+            //4.取剩下的那个人
+            return queue.peek()
+        }
+
+        //测试
+        names = ['LiLy', 'Lucy', 'Tom', 'LiLei', 'HDF']
+        alert(passGame(names, 3))
+    </script>
+</body>
+
+</html>
