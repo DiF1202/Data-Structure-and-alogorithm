@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //设计哈希函数
+        //1>将字符串转成比较大的数字:hashcode
+        //2.将大的数字hascode压缩在数组范围之内
+        function hashFunc(str, size) {
+            //1.定义hashCode变量
+            var hashCode = 0
+
+            //2.霍纳算法,来计算hashCode值
+            //cats ->UniCode编码
+            for (var i = 0; i < str.length; i++) {
+                hashCode = 37 * hashCode + str.charCodeAt(i)
+            }
+
+            //3.取余操作
+            index = hashCode % size
+
+            return index
+        }
+
+        alert(hashFunc('abc', 7))
+        alert(hashFunc('mmbqwec', 7))
+        alert(hashFunc('qasdazxvebcsfea', 7))
+    </script>
+</body>
+
+</html>
